@@ -7,7 +7,7 @@ import LoginHeader from './LoginHeader'
 import { useHistory } from 'react-router-dom'
 import { Button } from '../containers/Button.js';
 
-export const StudentPage = () => {
+export const StudentLogin = () => {
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             username: '',
