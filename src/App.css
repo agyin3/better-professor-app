@@ -15,6 +15,17 @@
   margin-bottom: 1.5rem;
 }
 
+.prof-sign-in {
+  width: 30rem;
+  padding: 2%;
+  font-size: 2rem;
+  background: #F1EFEF;
+  border: 2px solid #DCDADA;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
 .sign-in-text {
   color: #0A122A;
   margin: 1rem 0 0;
@@ -51,4 +62,18 @@
   border: 2px solid #DCDADA;
   border-radius: 5px;
   margin-bottom: 1.5rem;
+}
+
+.error {
+  color: #9B2915;
+  font-size: 1.8rem;
+  text-align: center;
+  margin: -1.5rem 0 1.5rem;
+}
+
+.error-message {
+  color: #9B2915;
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 0;
 }
