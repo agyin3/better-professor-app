@@ -7,13 +7,18 @@ import LoginHeader from './LoginHeader'
 import { useHistory } from 'react-router-dom'
 import { Button } from '../containers/Button.js';
 import { axiosWithAuth } from '../utils/axiosWithAuth.js'
+import { useDispatch, useSelector } from 'react-redux';
+import { registerStudent } from '../actions/actions.js';
+import { LoadingLottie } from '../containers/LoadingLottie'
 
 export const StudentSignup = () => {
+    const dispatch = useDispatch()
+    const [isLoading, registerError] = useSelector(({ students }) => [students.isLoading, students.registerError])
     const [professors, setProfessors] = useState()
     const [students, setStudents] = useState()
     const [selected, setSelected] = useState(false)
     
-    const { register, handleSubmit, errors } = useForm({
+    const { register, handleSubmit, errors, reset } = useForm({
         defaultValues: {
             username: '',
             password: '',
@@ -21,23 +26,13 @@ export const StudentSignup = () => {
             id: ''
         }
     });
+
     const history = useHistory()
 
     const onSubmit = (data) => {
-        // need to move to actions file
-        axiosWithAuth()
-            .put(`/students/${data.id}?register=true`, {
-                username: data.username,
-                password: data.password,
-                email: data.email,
-                registered: true
-            })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // need to add history push
+        dispatch(registerStudent(data))
+        reset()
     };
 
     const getStudents = (e) => {
@@ -62,6 +57,16 @@ export const StudentSignup = () => {
             })
     },[])
 
+    if(isLoading){
+        return(
+            <>
+                <LoginHeader />
+                <Container>
+                    <LoadingLottie />
+                </Container>
+            </>
+        )
+    }
     
     return(
         <>
@@ -91,7 +96,7 @@ export const StudentSignup = () => {
                             name="id" 
                             ref={register({ required: true })}
                             >
-                                <option>Select A Professor</option>
+                                <option>Student Name</option>
                                 {students && students.map(student => {
                                     return(
                                         <option key={student.id} value={student.id}>{student.firstName} {student.lastName}</option>
@@ -105,22 +110,25 @@ export const StudentSignup = () => {
                                 type="text" 
                                 placeholder="Email" 
                                 name="email" 
-                                ref={register({required: true, maxLength: 80})} 
+                                ref={register({required: 'This field is required', maxLength: 80})} 
                                 />
+                                {errors.email && <p className='error'>{errors.email.message}</p> }
                                 <input
                                 className='register' 
                                 type="text" 
                                 placeholder="Username" 
                                 name="username" 
-                                ref={register({required: true, maxLength: 80})} 
+                                ref={register({required: 'This field is required', maxLength: 80})} 
                                 />
+                                {errors.username && <p className='error'>{errors.username.message}</p>}
                                 <input 
                                 className='register'
                                 type="password" 
                                 placeholder="Password" 
                                 name="password" 
-                                ref={register({required: true, min: 6})} 
+                                ref={register({required: 'This field is required', minLength: {value: 6, message: 'Password must be 6 characters long'}})} 
                                 />
+                                {errors.password && <p className='error'>{errors.password.message}</p>}
                                 </>
                             }
                             <Button  
@@ -130,6 +138,7 @@ export const StudentSignup = () => {
                             >
                                 Submit
                             </Button>
+                            <p className='error-message'>{registerError}</p>
                             <p className='sign-in-text'>
                                 Have An Account | <a className='sign-in-link' href='/student/login'>Sign In</a>
                             </p>

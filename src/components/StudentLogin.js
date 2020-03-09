@@ -6,9 +6,14 @@ import Student from '../svg/Student'
 import LoginHeader from './LoginHeader'
 import { useHistory } from 'react-router-dom'
 import { Button } from '../containers/Button.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoadingLottie } from '../containers/LoadingLottie.js'
+import { userLogin } from '../actions/actions.js';
 
 export const StudentLogin = () => {
-    const { register, handleSubmit, errors } = useForm({
+    const dispatch = useDispatch()
+    const [isLoading, loginError] = useSelector(({ students }) => [students.isLoading, students.loginError])
+    const { register, handleSubmit, errors, reset } = useForm({
         defaultValues: {
             username: '',
             password: ''
@@ -16,7 +21,22 @@ export const StudentLogin = () => {
     });
     const history = useHistory()
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        dispatch(userLogin('student', data))
+        reset()
+    }
+
+    if(isLoading){
+        return(
+            <>
+                <LoginHeader />
+                <Container>
+                    <LoadingLottie />
+                </Container>
+            </>
+        )
+    }
+
     return(
         <>
             <LoginHeader/>
@@ -31,15 +51,17 @@ export const StudentLogin = () => {
                             type="text" 
                             placeholder="Username" 
                             name="username" 
-                            ref={register({required: true, maxLength: 80})} 
+                            ref={register({required: 'This field is required', maxLength: 80})}  
                             />
+                            {errors.username && <p className='error'>{errors.username.message}</p>}
                             <input 
                             className='sign-in'
                             type="password" 
                             placeholder="Password" 
                             name="password" 
-                            ref={register({required: true, min: 6})} 
+                            ref={register({required: 'This field is required', minLength: {value: 6, message: 'Password must be 6 characters long'}})} 
                             />
+                            {errors.password && <p className='error'>{errors.password.message}</p>}
                             <Button  
                             size='2.4rem'
                             width='20rem'
@@ -47,6 +69,7 @@ export const StudentLogin = () => {
                             >
                                 Submit
                             </Button>
+                            <p className='error-message'>{loginError}</p>
                             <p className='sign-in-text'>
                                 Need An Account | <a className='sign-in-link' href='/student/signup'>Sign Up</a>
                             </p>
