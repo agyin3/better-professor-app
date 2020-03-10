@@ -1,12 +1,17 @@
 import * as types from '../actions/types.js'
 
-const initialState = {
+let initialState = {
     student: {},
     reminders: [],
     projects: {},
     isLoading: false,
     registerError: '',
     loginError: ''
+}
+
+const persistedData = localStorage.getItem('reduxState')
+if(persistedData){
+    initialState = JSON.parse(persistedData).students
 }
 
 export const students = (state=initialState, {type, payload}) => {
