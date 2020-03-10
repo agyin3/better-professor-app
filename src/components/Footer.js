@@ -8,13 +8,14 @@ const FooterContainer = styled.div`
     justify-content: center;
     align-items: center;
     background: #113F67;
-    padding: 1%;
+    padding: 2%;
+    font-size: 1.6rem;
 `
 
 export const Footer = () => {
     return(
         <FooterContainer>
-            <p>&copy; 2019 Buddy Agyin</p>
+            <p style={{marginBottom: '0'}}>&copy; 2019 Buddy Agyin</p>
         </FooterContainer>
     )
 }
