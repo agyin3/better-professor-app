@@ -7,9 +7,10 @@ const MainContainer = styled.div`
     justify-content: ${props => props.justify || 'center'};
     align-items: ${props => props.align || 'center'};
     padding: ${props => props.padding || '2%'};
-    height: ${props => props.height || 'auto'};
+    min-height: ${props => props.height || 'auto'};
     width: ${props => props.width || 'auto'};
     background: ${props => props.background || '#fff'};
+    margin: ${props => props.margin || '0'}
 `
 
 export const Container = (props) => {
@@ -22,6 +23,7 @@ export const Container = (props) => {
         height={props.height}
         width={props.width}
         background={props.background}
+        margin={props.margin}
         >
             {props.children}
         </MainContainer>
