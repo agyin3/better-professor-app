@@ -10,9 +10,10 @@ export const Button = styled.button`
     padding: ${props => props.padding || '2% 0'};
     border-radius: 5px;
     font-size: ${props => props.size || '1.6rem'};
+    margin: ${props => props.margin || 'auto'};
 
     &:hover {
         cursor: pointer;
-        color: #87C0CD;
+        color: ${props => props.hover || '#87C0CD'};
     }
 `
