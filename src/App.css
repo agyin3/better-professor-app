@@ -1,3 +1,5 @@
+/* Sign In and Login Styling */
+
 .sign-in-heading {
   font-size: 4.8rem;
   color: #113F67;
@@ -76,4 +78,53 @@
   font-size: 1.8rem;
   text-align: center;
   margin: 0;
+}
+
+.student-form {
+  width: 30rem;
+  padding: 1%;
+  font-size: 1.8rem;
+  background: #F1EFEF;
+  border: 2px solid #DCDADA;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+/* Nav Link Styling */
+
+.nav-links {
+  color: #F3F9FB;
+  font-size: 2rem;
+}
+
+.nav-links:hover {
+  color: #F3F9FB;
+}
+
+/* Modal Styling */
+
+.modal-title {
+  font-size: 2.2rem;
+}
+
+.close {
+  font-size: 2.4rem;
+}
+
+/* Professor Dashboard Styling */
+
+.professor-heading {
+  font-size: 3.6rem;
+  margin-bottom: 2rem;
+}
+
+/* Professor Student Card Styling */
+
+.card-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.card-title:hover {
+  cursor: pointer;
 }
