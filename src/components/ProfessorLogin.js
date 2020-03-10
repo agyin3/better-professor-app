@@ -1,7 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { Container } from '../containers/Container.js'
-import { Footer } from './Footer.js'
 import Professor from '../svg/Professor'
 import LoginHeader from './LoginHeader'
 import { useHistory } from 'react-router-dom'
@@ -12,7 +11,7 @@ import { userLogin } from '../actions/actions.js';
 
 export const ProfessorLogin = () => {
     const dispatch = useDispatch()
-    const [isLoading, loginError] = useSelector(({professors}) => [professors.isLoading, professors.loginError])
+    const [isLoading, loginError] = useSelector(({professors}) => [professors.isLoading, professors.errors.login])
     const { register, handleSubmit, errors, reset } = useForm({
         defaultValues: {
             username: '',
@@ -21,8 +20,8 @@ export const ProfessorLogin = () => {
     });
     const history = useHistory()
 
-    const onSubmit = data => {
-        dispatch(userLogin('professor', data))
+    const onSubmit = (data) => {
+        dispatch(userLogin('professor', data, history))
         reset()
     }
 
@@ -30,7 +29,7 @@ export const ProfessorLogin = () => {
         return(
             <>
                 <LoginHeader />
-                <Container>
+                <Container height='85vh'>
                     <LoadingLottie />
                 </Container>
             </>
@@ -80,7 +79,6 @@ export const ProfessorLogin = () => {
                     </form>
                 </Container>
             </Container>
-            <Footer />
         </>
     )
 }

@@ -12,7 +12,7 @@ import { professorRegister } from '../actions/actions.js';
 
 export const ProfessorSignup = () => {
     const dispatch = useDispatch()
-    const [isLoading, loginError] = useSelector(({professors}) => [professors.isLoading, professors.loginError])
+    const [isLoading, registerError] = useSelector(({professors}) => [professors.isLoading, professors.errors.register])
     const { register, handleSubmit, errors, reset } = useForm({
         defaultValues: {
             username: '',
@@ -33,7 +33,7 @@ export const ProfessorSignup = () => {
         return(
             <>
                 <LoginHeader />
-                <Container>
+                <Container height='85vh'>
                     <LoadingLottie />
                 </Container>
             </>
@@ -99,7 +99,7 @@ export const ProfessorSignup = () => {
                             >
                                 Submit
                             </Button>
-                            <p className='error-message'>{loginError}</p>
+                            <p className='error-message'>{registerError}</p>
                             <p className='sign-in-text'>
                                 Have An Account | <a className='sign-in-link' href='/professor/login'>Sign in</a>
                             </p>
@@ -110,7 +110,6 @@ export const ProfessorSignup = () => {
                     </form>
                 </Container>
             </Container>
-            <Footer />
         </>
     )
 }
