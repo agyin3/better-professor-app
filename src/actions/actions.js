@@ -66,7 +66,6 @@ export const fetchStudents = (id) => dispatch => {
 }
 
 export const addStudent = (id, student) => dispatch => {
-    console.log(student)
     dispatch({type: types.ADD_STUDENT_START})
     axiosWithAuth()
         .post(`/users/professor/${id}/students`, student)
@@ -78,7 +77,22 @@ export const addStudent = (id, student) => dispatch => {
                 })
         })
         .catch(err => {
-            console.log(err)
             dispatch({type: types.ADD_STUDENT_FAIL, payload: 'Error adding new student'})
+        })
+}
+
+export const deleteStudent = (id, profId) => dispatch => {
+    dispatch({type: types.DELETE_STUDENT_START})
+    axiosWithAuth()
+        .delete(`/students/${id}`)
+        .then(() => {
+            axiosWithAuth()
+                .get(`/users/professor/${profId}/students`)
+                .then(res => {
+                    dispatch({type: types.DELETE_STUDENT_SUCCESS, payload: res.data.data.students})
+                })
+        })
+        .catch(() => {
+            dispatch({type: types.DELETE_STUDENT_FAIL, payload: 'Error deleting student'})
         })
 }
