@@ -8,7 +8,8 @@ let initialState = {
         login: '',
         register: '',
         fetch: '',
-        add: ''
+        add: '',
+        delete: ''
     }
 }
 
@@ -17,7 +18,8 @@ const resetErrors = () => {
         login: '',
         register: '',
         fetch: '',
-        add: ''
+        add: '',
+        delete: ''
     }
 }
 
@@ -31,6 +33,7 @@ export const professors = (state=initialState, {type, payload}) => {
         case types.REGISTER_PROFESSOR_START:
         case types.FETCH_STUDENTS_START:
         case types.ADD_STUDENT_START:
+        case types.DELETE_STUDENT_START:
             return{
                 ...state,
                 isLoading: true
@@ -65,6 +68,8 @@ export const professors = (state=initialState, {type, payload}) => {
                 }
             }
         case types.FETCH_STUDENTS_SUCCESS:
+        case types.ADD_STUDENT_SUCCESS:
+        case types.DELETE_STUDENT_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -80,13 +85,6 @@ export const professors = (state=initialState, {type, payload}) => {
                     fetch: payload
                 }
             }
-        case types.ADD_STUDENT_SUCCESS: 
-            return {
-                ...state,
-                isLoading: false,
-                students: [...payload],
-                errors: resetErrors()
-            }
         case types.ADD_STUDENT_FAIL:
             return {
                 ...state,
@@ -94,6 +92,15 @@ export const professors = (state=initialState, {type, payload}) => {
                 errors: {
                     ...state.errors,
                     add: payload
+                }
+            }
+        case types.DELETE_STUDENT_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                errors: {
+                    ...state.errors,
+                    delete: payload
                 }
             }
         default:
