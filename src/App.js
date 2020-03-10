@@ -7,9 +7,12 @@ import { ProfessorLogin } from './components/ProfessorLogin.js';
 import { ProfessorSignup } from './components/ProfessorSignup.js';
 import { StudentLogin } from './components/StudentLogin.js';
 import { StudentSignup } from './components/StudentSignup.js';
+import ProfessorDashboard from './components/ProfessorDashboard';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
+    <>
     <Switch>
       <Route exact path='/'>
         <WelcomePage />
@@ -26,7 +29,10 @@ function App() {
       <Route exact path='/student/signup'>
         <StudentSignup />
       </Route>
+      <PrivateRoute exact path='/professor/dashboard' component={ProfessorDashboard}/>
     </Switch>
+    <Footer />
+    </>
   );
 }
 
