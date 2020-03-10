@@ -30,7 +30,7 @@ export const StudentLogin = () => {
         return(
             <>
                 <LoginHeader />
-                <Container>
+                <Container height='85vh'>
                     <LoadingLottie />
                 </Container>
             </>
@@ -80,7 +80,6 @@ export const StudentLogin = () => {
                     </form>
                 </Container>
             </Container>
-            <Footer />
         </>
     )
 }
