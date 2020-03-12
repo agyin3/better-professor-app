@@ -34,9 +34,15 @@ export const professors = (state=initialState, {type, payload}) => {
         case types.FETCH_STUDENTS_START:
         case types.ADD_STUDENT_START:
         case types.DELETE_STUDENT_START:
-            return{
+        case types.SET_LOADING:
+            return {
                 ...state,
                 isLoading: true
+            }
+        case types.END_LOADING:
+            return {
+                ...state,
+                isLoading: false
             }
         case types.LOGIN_SUCCESS: 
         case types.REGISTER_PROFESSOR_SUCCESS:

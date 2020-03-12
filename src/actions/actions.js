@@ -2,7 +2,6 @@ import * as types from './types.js'
 import { axiosWithAuth } from '../utils/axiosWithAuth.js'
 import axios from 'axios'
 
-
 export const userLogin = (type, credentials, history) => dispatch => {
     dispatch({type: types.LOGIN_START})
     axiosWithAuth()
