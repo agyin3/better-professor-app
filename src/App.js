@@ -9,6 +9,7 @@ import { StudentLogin } from './components/StudentLogin.js';
 import { StudentSignup } from './components/StudentSignup.js';
 import ProfessorDashboard from './components/ProfessorDashboard';
 import { Footer } from './components/Footer';
+import StudentView from './components/StudentView';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <StudentSignup />
       </Route>
       <PrivateRoute exact path='/professor/dashboard' component={ProfessorDashboard}/>
+      <PrivateRoute exact path='/professor/students/:id' component={StudentView}/>
     </Switch>
     <Footer />
     </>
