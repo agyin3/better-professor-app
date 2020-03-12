@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardTitle } from 'reactstrap'
 import { FaTrashAlt } from 'react-icons/fa'
