@@ -4,7 +4,7 @@ import DashboardHeader from './DashboardHeader.js'
 import { Container } from '../containers/Container'
 import AddStudentModal from './AddStudentModal'
 import { fetchStudents } from '../actions/actions'
-import { CardColumns } from 'reactstrap'
+import { CardColumns, CardDeck } from 'reactstrap'
 import { useHistory } from 'react-router-dom'
 import StudentCard from './StudentCard.js'
 
@@ -17,7 +17,7 @@ const ProfessorDashboard = () => {
 
     useEffect(() => {
         dispatch(fetchStudents(professor.id))
-    }, [professor.id])
+    }, [professor.id, dispatch])
     return(
         <>
             <DashboardHeader />
@@ -28,13 +28,15 @@ const ProfessorDashboard = () => {
                     <p className='error-message'>{addError || deleteError}</p>
                 </Container>
                 <Container>
-                    <CardColumns>
-                    {students && students.map(student => {
-                        return(
-                                <StudentCard student={student} />
-                        )
-                    })}
-                    </CardColumns>
+                    <CardDeck>
+                        <CardColumns>
+                        {students && students.map(student => {
+                            return(
+                                    <StudentCard key={student.id} student={student} />
+                            )
+                        })}
+                        </CardColumns>
+                    </CardDeck>
                 </Container>
             </Container>
         </>
